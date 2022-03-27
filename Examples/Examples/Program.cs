@@ -13,21 +13,32 @@ namespace Examples
 	{
 		static void Main(string[] args)
 		{
-			//Stack<Empl> empls = new Stack<Empl>();
-			//empls.Push(new Empl { age = 100, name = "Nata"});
-			//empls.Push(new Empl { age = 103, name = "Roman"});
-			//empls.Push(new Empl { age = 73, name = "Vital"});
+			AADD aADD = new AADD();
+			aADD.Name = "Roman";
 
-			List<Empl> empls = new List<Empl>();
-			empls.Add(new Empl { age = 100, name = "Nata" });
-			empls.Add(new Empl { age = 103, name = "Roman" });
-			empls.Add(new Empl { age = 73, name = "Vital" });
+            Console.WriteLine(aADD.Name);
 
-			display(empls);
 
 			Console.WriteLine("Press any key to exit...");
 			Console.ReadLine();
 		}
+
+		class AADD
+        {
+			private string _name = "Roman";
+			public string Name
+            {
+                get
+                {
+					return _name;
+                }
+                set
+                {
+					_name = value + "20056";
+                }
+            }
+        };
+
 
 		static void f2()
 		{
