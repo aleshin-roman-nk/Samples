@@ -13,15 +13,36 @@ namespace Examples
 	{
 		static void Main(string[] args)
 		{
-			AADD aADD = new AADD();
-			aADD.Name = "Roman";
+			/*
+			 * 0 - 9 : 1
+			 * 10 - 19 : 2
+			 * 20 - 29 : 3
+			 * 30 - 39 : 4
+			 * 40 - 49 : 5
+			 * 50 - 59 : 6
+			 * 60 : 7
+			 */
 
-            Console.WriteLine(aADD.Name);
+			while (true)
+            {
+				int c = int.Parse(Console.ReadLine());
 
+				Console.WriteLine(getLevel(c));
+            }
 
 			Console.WriteLine("Press any key to exit...");
 			Console.ReadLine();
 		}
+
+		static string getLevel(int sCnt)
+        {
+			int lvl = sCnt / 10 + 1;
+			if(lvl > 6) lvl = 6;
+
+			return $"cLevel{lvl}";
+		}
+
+
 
 		class AADD
         {
