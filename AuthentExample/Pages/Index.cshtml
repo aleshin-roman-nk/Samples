@@ -1,0 +1,26 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+
+    string person = User.Identity.IsAuthenticated ? @Model.Nme : "guest!!!";
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome @person</h1>
+    <p>Authentication programm example</p>
+</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="card border-1 col-2">
+        Words
+    </div>
+    <div class="card border-1 col-2">
+        Martix
+    </div>
+    <div class="card border-1 col-2">
+        Object A
+    </div>
+}

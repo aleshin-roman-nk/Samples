@@ -18,7 +18,17 @@ namespace ManyToManyLesson
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite($"Filename={_path}");
+            //optionsBuilder.UseSqlite($"Filename={_path}");
+            optionsBuilder.UseSqlite($"Data Source={_path}");
+            //optionsBuilder.LogTo(x => Console.WriteLine(x));
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<matrix>()
+                .HasMany<word>(m => m.words)
+                .WithOne(g => g.matrix)
+                .HasForeignKey(s => s.matrix_id);
         }
 
         public DbSet<matrix> matrices { get; set; }

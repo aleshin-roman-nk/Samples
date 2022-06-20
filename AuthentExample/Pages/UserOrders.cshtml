@@ -1,0 +1,17 @@
+﻿@page
+@model AuthentExample.Pages.UserOrdersModel
+@{
+}
+
+<div class="row">
+    <div class="col-2 border"><b>#</b></div>
+    <div class="col-5 border"><b>name</b></div>
+</div>
+
+@foreach (var item in Model.UserOrders)
+{
+    <div class="row">
+        <div class="col-2 border">@item.id</div>
+        <div class="col-5 border">@item.name</div>
+    </div>
+}

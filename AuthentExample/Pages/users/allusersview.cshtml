@@ -1,0 +1,13 @@
+﻿@page
+@model AuthentExample.Pages.users.allusersviewModel
+@{
+}
+
+@foreach (var item in Model.Users)
+{
+    <div class="row">
+        <div class="col">@item.id</div>
+        <div class="col">@item.name</div>
+        <div class="col">@item.password</div>
+    </div>
+}

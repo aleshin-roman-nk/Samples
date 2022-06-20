@@ -10,5 +10,7 @@ namespace ManyToManyLesson
     {
         public int id { get; set; }
         public string name { get; set; }
+        public string descr { get; set; }
+        public ICollection<word> words { get; set; } = new List<word>();
     }
 }
