@@ -35,8 +35,7 @@ namespace AuthentExample.Pages.users
                 User user = repo.Get(Usr.Name, Usr.Password);
                 if (user != null)
                 {
-                    await Authenticate(user); // аутентификация
-
+                    await Authenticate(user);//аутентификация
                     return RedirectToPage("/Index");
                 }
                 Error = "Некорректные логин и(или) пароль";
@@ -70,7 +69,8 @@ namespace AuthentExample.Pages.users
                 //new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
 
                 new Claim(ClaimTypes.Name, usr.name),
-                new Claim(ClaimTypes.NameIdentifier, usr.id.ToString())
+                new Claim(ClaimTypes.NameIdentifier, usr.id.ToString()),
+                new Claim(ClaimTypes.Email, "usr@xoxol.com")
 
                 //new Claim("Name", usr.name),
                 //new Claim("Id", usr.id.ToString())
