@@ -1,0 +1,260 @@
+﻿[
+  {
+    "id": 1,
+    "parentId": 0,
+    "name": "Продукты",
+    "CatProperties": []
+  },
+  {
+    "id": 2,
+    "parentId": 0,
+    "name": "Хозтовары",
+    "CatProperties": [
+      {
+        "Id": 1,
+        "CatId": 2,
+        "Name": "Мыло"
+      },
+      {
+        "Id": 2,
+        "CatId": 2,
+        "Name": "Стиральный порошок"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "parentId": 1,
+    "name": "Офощи",
+    "CatProperties": [
+      {
+        "Id": 1,
+        "CatId": 3,
+        "Name": "Огурцы"
+      },
+      {
+        "Id": 2,
+        "CatId": 3,
+        "Name": "Помидоры"
+      },
+      {
+        "Id": 3,
+        "CatId": 3,
+        "Name": "Капуста"
+      },
+      {
+        "Id": 4,
+        "CatId": 3,
+        "Name": "Картофель"
+      },
+      {
+        "Id": 5,
+        "CatId": 3,
+        "Name": "Морковь"
+      },
+      {
+        "Id": 6,
+        "CatId": 3,
+        "Name": "Лук"
+      },
+      {
+        "Id": 7,
+        "CatId": 3,
+        "Name": "Чеснок"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "parentId": 1,
+    "name": "Фрукты",
+    "CatProperties": [
+      {
+        "Id": 1,
+        "CatId": 4,
+        "Name": "Яблоки"
+      },
+      {
+        "Id": 2,
+        "CatId": 4,
+        "Name": "Апельсины"
+      },
+      {
+        "Id": 3,
+        "CatId": 4,
+        "Name": "Бананы"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "parentId": 1,
+    "name": "Сладости",
+    "CatProperties": [
+      {
+        "Id": 1,
+        "CatId": 5,
+        "Name": "Шоколадная паста"
+      },
+      {
+        "Id": 2,
+        "CatId": 5,
+        "Name": "Конфеты"
+      },
+      {
+        "Id": 3,
+        "CatId": 5,
+        "Name": "Печенье"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "parentId": 0,
+    "name": "Джой",
+    "CatProperties": [
+      {
+        "Id": 1,
+        "CatId": 6,
+        "Name": "Перчатки"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "parentId": 0,
+    "name": "ррр",
+    "CatProperties": [
+      {
+        "Id": 1,
+        "CatId": 7,
+        "Name": "апап"
+      },
+      {
+        "Id": 2,
+        "CatId": 7,
+        "Name": "ффф"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "parentId": 0,
+    "name": "щщ",
+    "CatProperties": []
+  },
+  {
+    "id": 9,
+    "parentId": 5,
+    "name": "Кировский завод",
+    "CatProperties": []
+  },
+  {
+    "id": 10,
+    "parentId": 9,
+    "name": "Филиал Новокузнецк",
+    "CatProperties": []
+  },
+  {
+    "id": 11,
+    "parentId": 10,
+    "name": "Прокопьевск",
+    "CatProperties": []
+  },
+  {
+    "id": 12,
+    "parentId": 11,
+    "name": "Киселевск",
+    "CatProperties": []
+  },
+  {
+    "id": 13,
+    "parentId": 12,
+    "name": "Тырган",
+    "CatProperties": []
+  },
+  {
+    "id": 14,
+    "parentId": 13,
+    "name": "Наградская",
+    "CatProperties": []
+  },
+  {
+    "id": 15,
+    "parentId": 14,
+    "name": "Квартал 3",
+    "CatProperties": []
+  },
+  {
+    "id": 16,
+    "parentId": 1,
+    "name": "Хлебобулочные",
+    "CatProperties": []
+  },
+  {
+    "id": 17,
+    "parentId": 0,
+    "name": "hhh",
+    "CatProperties": [
+      {
+        "Id": 1,
+        "CatId": 17,
+        "Name": "ddd"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "parentId": 3,
+    "name": "Экзотика",
+    "CatProperties": [
+      {
+        "Id": 1,
+        "CatId": 18,
+        "Name": "Авокадо"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "parentId": 0,
+    "name": "qqq",
+    "CatProperties": [
+      {
+        "Id": 1,
+        "CatId": 19,
+        "Name": "wwww"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "parentId": 19,
+    "name": "qqqq",
+    "CatProperties": []
+  },
+  {
+    "id": 21,
+    "parentId": 0,
+    "name": "erer",
+    "CatProperties": [
+      {
+        "Id": 1,
+        "CatId": 21,
+        "Name": "вап"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "parentId": 3,
+    "name": "Что-тоА",
+    "CatProperties": [
+      {
+        "Id": 1,
+        "CatId": 22,
+        "Name": "абра-бам"
+      }
+    ]
+  }
+]

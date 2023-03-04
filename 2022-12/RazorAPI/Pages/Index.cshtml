@@ -1,0 +1,159 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="row" id="content">
+    <div class="col-lg-6">
+        <h3>All Cars</h3>
+        <ul id="car-list"></ul>
+        <button class="btn btn-sm btn-default" id="new">Add New</button>
+    </div>
+    <div class="col-lg-6">
+        <div id="details"></div>
+        <div id="form">
+            <form class="form-horizontal">
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label for="Model">Make</label>
+                    <input type="text" asp-for="Make" class="form-control input-sm" />
+                </div>
+                <div class="form-group">
+                    <label for="Model">Model</label>
+                    <input type="text" asp-for="Model" class="form-control input-sm" />
+                </div>
+                <div class="form-group">
+                    <label for="Colour">Colour</label>
+                    <input type="text" asp-for="Colour" class="form-control input-sm" />
+                </div>
+                <div class="form-group">
+                    <label for="Year">Year</label>
+                    <input type="number" asp-for="Year" class="form-control input-sm" />
+                </div>
+                <div class="form-group">
+                    <label for="Doors">Doors</label>
+                    <input type="number" asp-for="Doors" class="form-control input-sm" />
+                </div>
+                <div class="form-group">
+                    <label for="Price">Price</label>
+                    <input type="number" asp-for="Price" class="form-control input-sm" />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-sm" id="save">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+
+            var loadCars = function () {
+
+                $('#car-list').empty();
+
+                $.get('/api/car').done(function (cars) {
+                    $.each(cars, function (i, car) {
+                        var item = `<li>
+                                    <span class="entry">
+                                        <strong>${car.make} ${car.model}</strong>
+                                        (£${car.price})
+                                        </span>
+                                        <span class ="details" data-id="${car.id}">Details</span> |
+                                        <span class ="edit"  data-id="${car.id}">Edit</span> |
+                                        <span class ="delete"  data-id="${car.id}">Delete</span>
+                                    </li>`;
+                        $('#car-list').append(item);
+                    });
+                });
+
+            }
+
+            var showForm = function () {
+                $(':input').val('');
+                $('#details').empty();
+                $('#form').show();
+            }
+
+            var clearForm = function () {
+                $('#details').empty();
+                $(':input').val('');
+                $('#form').hide();
+            }
+
+            $('#new').on('click', showForm);
+
+            clearForm();
+            loadCars();
+
+            $('#car-list').on('click', '.edit, .details', function () {
+                var cmd = $(this);
+                $.get(`/api/car/${cmd.data('id')}`).done(function (car) {
+                    if (cmd.hasClass('details')) {
+                        clearForm()
+                        $('#details').empty().append(
+                            `<h3>Details</h3>
+                                <strong>${car.make} ${car.model}</strong><br>
+                                £${car.price}<br>
+                                Doors: ${car.doors}<br>
+                                Year: ${car.year}<br>
+                                Colour: ${car.colour}`
+                        );
+                    } else {
+                        showForm();
+                        $('#Id').val(car.id);
+                        $('#Make').val(car.make);
+                        $('#Model').val(car.model);
+                        $('#Colour').val(car.colour);
+                        $('#Year').val(car.year);
+                        $('#Doors').val(car.doors);
+                        $('#Price').val(car.price);
+                    }
+                });
+            });
+
+            $('#save').on('click', function (e) {
+                e.preventDefault();
+                var url = '/api/car/';
+                var method = 'post';
+                if ($('#Id').val() !== '') {
+                    url += $('#Id').val();
+                    method = 'put';
+                }
+                var car = {};
+                $.each($(this).closest('form').serializeArray(), function () {
+                    if (this.name !== 'Id' || (this.name === 'Id' && this.value !== '')) {
+                        car[this.name] = this.value || '';
+                    }
+                });
+                $.ajax({
+                    type: method,
+                    url: url,
+                    data: JSON.stringify(car),
+                    contentType: 'application/json'
+                }).done(function () {
+                    clearForm();
+                    loadCars();
+                });
+            });
+
+            $('#car-list').on('click', '.delete', function () {
+                $.ajax({
+                    type: 'delete',
+                    url: '/api/car/' + $(this).data('id'),
+                }).done(function () {
+                    clearForm();
+                    loadCars();
+                });
+            });
+        });
+    </script>
+}

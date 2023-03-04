@@ -1,0 +1,49 @@
+﻿@using CatsRestAPILesson;
+@model CatViewModel
+
+<p>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+
+            @*Корневой элемент*@
+            <li class="breadcrumb-item"><a class="item guide-category" data-guide-category-id="0" href="#">[Все]</a></li>
+
+            @*Вся цепочка родителей*@
+            @foreach(var item in Model.Parents)
+            {
+                <li class="breadcrumb-item"><a href="#" class="item guide-category" data-guide-category-id="@item.id">@item.name</a></li>
+            }
+
+            @*Текущий элемент, некликабельный*@
+            @if(Model.Cat != null)
+            {
+                <li class="breadcrumb-item active" aria-current="page">@Model.Cat.name</li>
+            }
+
+        </ol>
+    </nav>
+</p>
+
+<input type="hidden" value="@Model.Cat.id" id="catid-current" name="catid-current" />
+
+<div class="wrap">
+    @foreach (var item in Model.Children)
+    {
+        <div class="item guide-category" data-guide-category-id="@item.id">
+            @item.name
+        </div>
+    }
+</div>
+
+<hr />
+
+Cat properties:
+<br />
+<div class="wrap">
+    @foreach (var item in Model.Cat.CatProperties)
+    {
+        <div class="item item-prop guide-stuff" data-guide-stuff-id="@item.Id" data-guide-stuff-name="@item.Name">
+            @item.Name
+        </div>
+    }
+</div>

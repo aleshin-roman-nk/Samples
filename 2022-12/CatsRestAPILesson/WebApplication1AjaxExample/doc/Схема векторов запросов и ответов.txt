@@ -1,0 +1,36 @@
+Векторы запросов и ответов
+
+
+init
+отдаем страницу с:
+- объект CatViewModel корневого состояния (текущий кот с id = 0; дочерние объекты корня)
+- заголовок
+- форма создания (в перспективе создания товара покупки)
+- кнопка "выбрать продукт"
+- модальное окно:
+ - формы ввода и создания котов и их имущества
+  - partial:
+   - кнопка "вернуться"
+   - коллекция котов
+   - коллекция объектов имущества котов
+ 
+
+enterCat(id)
+onclick="enterCat(@item.id)"
+-> get запрос "дай коллекцию дочерних котов"
+<- ответ: partial
+в partial передается вновь созданный объект CatViewModel
+
+updating partial on:
+	- добавлении кота
+	 document.forms.newcatform.onsubmit
+	 server-side render
+	 
+	- добавлении имущества кота
+	 document.forms.catproperty.onsubmit
+	 server-side render
+	 
+	- выборе текущего кота, загрузка дочерних котов
+	 function enterCat(id)
+	 function exitCat(id)
+	 server-side render

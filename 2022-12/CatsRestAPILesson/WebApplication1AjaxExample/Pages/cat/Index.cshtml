@@ -1,0 +1,82 @@
+﻿@page
+@model CatsRestAPILesson.Pages.cat.IndexModel
+@{
+}
+
+
+
+<style>
+    .wrap {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 5px;
+    }
+
+    .item {
+        background-color: #FFFFE0;
+        user-select: none;
+    }
+
+        .item:hover {
+            background-color: #FFD700;
+        }
+
+    .item-prop {
+        background-color: #BDB76B;
+    }
+</style>
+
+<div>Cat name</div>
+
+<form method="post">
+    <input type="hidden" data-stuff-requests="id" />
+
+    <div class="input-group mb-3">
+        <button type="button" class="btn btn-outline-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">
+            ...
+        </button>
+
+        <input class="form-control" data-stuff-requests="name" type="text" disabled readonly placeholder="not selected" />
+    </div>
+</form>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+@*                <form method="post" name="newcatform">
+                    <input type="text" id="catname" name="catname">
+                    <input type="submit" value="add" />
+                </form>
+
+                <form method="post" name="catproperty">
+                    <input type="text" id="catpropertyname" name="catpropertyname">
+                    <input type="submit" value="add property" />
+                </form>*@
+
+                <div id="grid">
+                    <partial name="_catspartial" model="@Model.CurrentCat"></partial>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script src="~/js/cat-guide.js"></script>
+}
