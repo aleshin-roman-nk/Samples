@@ -1,0 +1,100 @@
+﻿[
+  {
+    "id": 1,
+    "parentId": 0,
+    "name": "Продукты",
+    "CatProperties": []
+  },
+  {
+    "id": 2,
+    "parentId": 0,
+    "name": "Хозтовары",
+    "CatProperties": []
+  },
+  {
+    "id": 3,
+    "parentId": 1,
+    "name": "Офощи",
+    "CatProperties": [
+      {
+        "Id": 1,
+        "CatId": 3,
+        "Name": "Огурцы"
+      },
+      {
+        "Id": 2,
+        "CatId": 3,
+        "Name": "Помидоры"
+      },
+      {
+        "Id": 3,
+        "CatId": 3,
+        "Name": "Капуста"
+      },
+      {
+        "Id": 4,
+        "CatId": 3,
+        "Name": "Картофель"
+      },
+      {
+        "Id": 5,
+        "CatId": 3,
+        "Name": "Морковь"
+      },
+      {
+        "Id": 6,
+        "CatId": 3,
+        "Name": "Лук"
+      },
+      {
+        "Id": 7,
+        "CatId": 3,
+        "Name": "Чеснок"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "parentId": 1,
+    "name": "Фрукты",
+    "CatProperties": [
+      {
+        "Id": 1,
+        "CatId": 4,
+        "Name": "Яблоки"
+      },
+      {
+        "Id": 2,
+        "CatId": 4,
+        "Name": "Апельсины"
+      },
+      {
+        "Id": 3,
+        "CatId": 4,
+        "Name": "Бананы"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "parentId": 1,
+    "name": "Сладости",
+    "CatProperties": [
+      {
+        "Id": 1,
+        "CatId": 5,
+        "Name": "Шоколадная паста"
+      },
+      {
+        "Id": 2,
+        "CatId": 5,
+        "Name": "Конфеты"
+      },
+      {
+        "Id": 3,
+        "CatId": 5,
+        "Name": "Печенье"
+      }
+    ]
+  }
+]

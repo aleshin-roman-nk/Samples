@@ -1,0 +1,33 @@
+﻿@model CatViewModel
+
+@{
+}
+
+<button class="btn btn-outline-primary" onclick="exitCat(@Model.Cat.id)">выйти</button>
+
+<p>
+    Cat ID = @Model.Cat.id<br />
+    Cat Name = @Model.Cat.name <br />
+    Path : @Model.Path
+</p>
+
+<input type="hidden" value="@Model.Cat.id" id="catid" name="catid" />
+
+<div class="wrap">
+    @foreach (var item in Model.Children)
+    {
+        <div class="item" onclick="enterCat(@item.id)">
+            @item.name
+        </div>
+    }
+</div>
+<hr />
+Cat properties: <br />
+<div class="wrap">
+        @foreach (var item in Model.Cat.CatProperties)
+    {
+        <div class="item item-prop" onclick="chooseCatProperty(@item.Id, '@item.Name')">
+            @item.Name
+        </div>
+    }
+</div>

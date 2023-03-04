@@ -1,0 +1,185 @@
+﻿@page
+@model WebApplication1AjaxExample.Pages.cat.IndexModel
+@{
+}
+
+<style>
+    .wrap {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 5px;
+    }
+
+    .item {
+        background-color: #FFFFE0;
+        user-select: none;
+    }
+
+        .item:hover {
+            background-color: #FFD700;
+        }
+
+    .item-prop {
+        background-color: #BDB76B;
+    }
+</style>
+
+@*<form method="post">
+    <input type="hidden" id="catid" name="catid" value="@Model.CurrentCat.Cat.id" />
+    <input type="text" id="catname" name="catname">
+    <input type="submit" value="add" />
+</form>*@
+
+@*<form method="post">
+    <input type="text" id="catname" name="catname">
+    <input type="submit" value="add" />
+</form>
+
+<div id="grid">
+    <partial name="_catspartial" model="@Model.CurrentCat"></partial>
+</div>*@
+
+<div>Cat name</div>
+<diw class="form-group row">
+    <div class="col-md-3">
+        <input class="form-control" type="text" disabled readonly id="selcatvalue" placeholder="not selected" />
+        <input type="hidden" id="selcatpropid" />
+    </div>
+</diw>
+
+@section scripts{
+    <script>
+        function enterCat(id) {
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById('grid').innerHTML = this.responseText
+                }
+            };
+            xhr.open('get', '/cat/index?handler=enterCatPartial&catid=' + id);
+            xhr.send();
+        }
+
+        function exitCat(id) {
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById('grid').innerHTML = this.responseText
+                }
+            };
+            xhr.open('get', '/cat/index?handler=exitCatPartial&catid=' + id);
+            xhr.send();
+
+        }
+
+        // Код установления нужного поля выбора имущества кота
+        // Не обязательно получать PartialViewResult
+        // попробовать получить просто переменную
+        // для начала написать просто get метод
+        // !!! Вообще то мы можем переменную из параметра (catid, propid) записать в поле на странице
+        // и еще можно вернуть в innerHTML, потом учитывать это когда создаю объект
+        // На создаваемой странице нужно указать id и name товар-типа stuff_type класс
+
+        // А можно обращаться и на api
+        function chooseCatProperty(propid, propname) {
+
+            document.getElementById('selcatvalue').value = propname;
+            document.getElementById('selcatpropid').value = propid;
+
+            //var xhr = new XMLHttpRequest();
+            //xhr.onreadystatechange = function () {
+            //    if (this.readyState == 4 && this.status == 200) {
+            //        //document.getElementById('grid').innerHTML = this.responseText
+            //        alert(this.responseText)
+            //    }
+            //};
+            //xhr.open('get', '/cat/index?handler=CatProp');
+            //xhr.send();
+
+        }
+
+
+        document.forms[0].onsubmit = () => {
+            let formData = new FormData(document.forms[0]);
+
+            formData.append('catid', document.getElementById('catid').value);
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.getElementById('grid').innerHTML = this.responseText;
+                }
+            };
+            xhr.open('post', '', true);
+            //xhr.open('post', '/cat/index?handler=VerseOne', true);
+            xhr.send(new URLSearchParams(formData));
+            return false;
+        };
+
+
+        document.forms.catproperty.onsubmit = () => {
+            let formData = new FormData(document.forms.catproperty);
+
+            formData.append('catid', document.getElementById('catid').value);
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.getElementById('grid').innerHTML = this.responseText;
+                }
+            };
+            //xhr.open('post', '', true);
+            xhr.open('post', '/cat/index?handler=AddProperty', true);
+            xhr.send(new URLSearchParams(formData));
+            return false;
+        };
+
+
+
+    </script>
+}
+
+
+
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Выбрать товар
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post">
+                    <input type="text" id="catname" name="catname">
+                    <input type="submit" value="add" />
+                </form>
+
+                <form method="post" name="catproperty">
+                    <input type="text" id="catpropertyname" name="catpropertyname">
+                    <input type="submit" value="add property" />
+                </form>
+
+                <div id="grid">
+                    <partial name="_catspartial" model="@Model.CurrentCat"></partial>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
+</div>
