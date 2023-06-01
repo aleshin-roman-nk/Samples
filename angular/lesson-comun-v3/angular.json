@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "lesson2-draw": {
+    "lesson-comun-v3": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/lesson2-draw",
+            "outputPath": "dist/lesson-comun-v3",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "lesson2-draw:build:production"
+              "browserTarget": "lesson-comun-v3:build:production"
             },
             "development": {
-              "browserTarget": "lesson2-draw:build:development"
+              "browserTarget": "lesson-comun-v3:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "lesson2-draw:build"
+            "browserTarget": "lesson-comun-v3:build"
           }
         },
         "test": {
@@ -96,6 +96,6 @@
     }
   },
   "cli": {
-    "analytics": "811e5f4a-9a61-4425-a488-cef360dff454"
+    "analytics": "ccadb1e3-a33b-44ff-a02f-9d3cda3d494f"
   }
 }

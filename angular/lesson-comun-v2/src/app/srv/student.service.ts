@@ -16,24 +16,25 @@ export class StudentService {
     { id: 4, name: 'Petr' },
   ])
 
-//В рамках хорошего тона отдельный обзервабле
-students$: Observable<Student[]> = this.students.asObservable()
+  //В рамках хорошего тона отдельный обзервабле
+  students$: Observable<Student[]> = this.students.asObservable()
 
-addName(name: string){
-this.students$.pipe(take(1)).subscribe((val) =>{
-  
-  let stdLenght = 0;
-  this.students$.subscribe( (students) =>{
-    stdLenght = students.length
-  })
-  
-  const newStudent = {
-    name: name,
-    id: stdLenght + 1
+  addName(name: string) {
+    this.students$.pipe(take(1)).subscribe((val) => {
+
+      let stdLenght = 0;
+      this.students$.subscribe((students) => {
+        stdLenght = students.length
+      })
+
+      const newStudent = {
+        name: name,
+        id: stdLenght + 1
+      }
+
+      const newArray = [...val, newStudent];
+      this.students.next(newArray);
+    })
   }
-
-  const newArray = [...val, newStudent];
-  this.students.next(newArray);
-})}
 
 }

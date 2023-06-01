@@ -3,14 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RenderComponent } from './render/render.component';
-import { RenderAComponent } from './render-a/render-a.component';
+import { V1CommunComponent } from './comp/v1-commun/v1-commun.component';
+import { InputComponent } from './comp/input/input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RenderComponent,
-    RenderAComponent
+    V1CommunComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,

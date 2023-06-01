@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+.products-container{
+    margin: 10%;
+    border: 1px solid black;
+}
+
+.products-container ul li{
+    list-style-type: circle;
+}
