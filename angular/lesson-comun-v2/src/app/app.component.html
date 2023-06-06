@@ -9,3 +9,19 @@
     </ul>
   </div>
 </div>
+
+<div class="container mt-6">
+  <app-input (outEnterName)="addName($event)"></app-input>
+  <div class="mt-6">
+    <h2>Список студентов :</h2>
+    <ul>
+      <li class="mb-1 mt-1" *ngFor="let item of someSrv.myArray">
+        {{item}}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<p>{{iii}}</p>
+
+<button (click)="someSrv.Ttt()">Ttt</button>
