@@ -29,6 +29,26 @@ export class StudentService {
   stream$ = of(1, 2, 3, 4, 5)
   streamStud$ = from(this.studentsArr)
 
+  stream2$ = of([
+    { id: 1, name: 'Ivan' },
+    { id: 2, name: 'Bill' },
+    { id: 3, name: 'John' },
+    { id: 4, name: 'Petr' },
+  ],
+  [
+    { id: 1, name: 'Ivan1' },
+    { id: 2, name: 'Bill1' },
+    { id: 3, name: 'John1' },
+    { id: 4, name: 'Petr1' },
+  ],
+  [
+    { id: 1, name: 'Ivan2' },
+    { id: 2, name: 'Bill2' },
+    { id: 3, name: 'John2' },
+    { id: 4, name: 'Petr2' },
+  ]
+  )
+
   //streamStud1$ = new Observable<Student[]>(this.studentsArr)
 
 
@@ -37,20 +57,20 @@ export class StudentService {
       next: v => {let i = 0; console.log(v[i].name); i++}
     }) */
 
-    let i: number = 0;    
+    let i: number = 0;
 /*     this.stream$.pipe(take(3)).subscribe(val => {
       console.log(`Value ${i} :`, val)
       i++;
     }) */
 
-    this.streamStud$.pipe(take(3)).subscribe(val => {
+    this.stream2$.pipe(take(3)).subscribe(val => {
       console.log(val)
     })
 
   }
 
   addName(name: string) {
-    
+
     let i: number = 0;
 
     // После того как выполнена операция pipe(take(1)) мы можем подписаться по окончании ее выполнения и подписаться чтобы обработать результат
