@@ -14,7 +14,7 @@ export class ProductsService {
     private http: HttpClient,
     private errorService: ErrorService
   ) {
-
+    console.log("ProductsService has been created")
   }
 
   products: IProduct[] = []
