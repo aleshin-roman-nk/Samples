@@ -1,4 +1,21 @@
-<div class="container mt-6">
+<button class="rounded-full px-3 border border-gray-600" (click)="reloadProducte()">products</button>
+<button class="rounded-full px-3 border border-gray-600" (click)="addN()">add n</button>
+<button class="rounded-full px-3 border border-gray-600" (click)="create()">create product</button>
+<button class="rounded-full px-3 border border-gray-600" (click)="createFetch()">create fetch</button>
+
+<hr>
+
+<div *ngFor="let n of romanSrv.data123">{{n}}; </div>
+
+<hr>
+
+<!-- <div *ngFor="let p of romanSrv.data$ | async">{{p.title}}; </div> -->
+<div class="grid grid-cols-4 gap-4 py-4">
+  <app-product *ngFor="let p of romanSrv.data$ | async" [product]="p"></app-product>
+</div>
+
+
+<!-- <div class="container mt-6">
   <app-input (outEnterName)="addName($event)"></app-input>
   <div class="mt-6">
     <h2>Список студентов :</h2>
@@ -8,9 +25,9 @@
       </li>
     </ul>
   </div>
-</div>
+</div> -->
 
-<div class="container mt-6">
+<!-- <div class="container mt-6">
   <app-input (outEnterName)="addName($event)"></app-input>
   <div class="mt-6">
     <h2>Список студентов :</h2>
@@ -25,4 +42,4 @@
 <p>{{iii}}</p>
 
 <button (click)="studentService.ttt()">Ttt</button>
-<button (click)="studentService.runSubscr()">Ttt</button>
+<button (click)="studentService.runSubscr()">Ttt</button> -->
