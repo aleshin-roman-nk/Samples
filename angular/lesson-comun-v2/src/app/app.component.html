@@ -3,6 +3,18 @@
 <button class="rounded-full px-3 border border-gray-600" (click)="create()">create product</button>
 <button class="rounded-full px-3 border border-gray-600" (click)="createFetch()">create fetch</button>
 
+<button class="rounded-full px-3 border border-gray-600" (click)="exampleASrv.run()">example a</button>
+
+<hr>
+
+<button class="rounded-full px-3 border border-gray-600" (click)="exampleBSrv.run()">example b</button>
+<app-example-b [objectB]="exampleBSrv.data$ | async"></app-example-b>
+
+<hr>
+<button class="rounded-full px-3 border border-gray-600" (click)="exampleCSrv.run()">c.run</button>
+<button class="rounded-full px-3 border border-gray-600" (click)="exampleCSrv.run1()">c.run1</button>
+<button class="rounded-full px-3 border border-gray-600" (click)="exampleCSrv.run2()">c.run2</button>
+<button class="rounded-full px-3 border border-gray-600" (click)="oper()">oper</button>
 <hr>
 
 <div *ngFor="let n of romanSrv.data123">{{n}}; </div>

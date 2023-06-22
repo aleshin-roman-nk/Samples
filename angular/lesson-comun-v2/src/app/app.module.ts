@@ -7,13 +7,15 @@ import { InputComponent } from './comps/input/input.component';
 import { StudentComponent } from './comps/student/student.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductComponent } from './comps/product/product.component';
+import { ExampleBComponent } from './comps/example-b/example-b.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InputComponent,
     StudentComponent,
-    ProductComponent
+    ProductComponent,
+    ExampleBComponent
   ],
   imports: [
     BrowserModule,

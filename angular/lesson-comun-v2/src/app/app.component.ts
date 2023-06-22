@@ -4,6 +4,9 @@ import { Student } from './model';
 import { Observable } from 'rxjs';
 import { SomeserviceService } from './srv/someservice.service';
 import { RomanService } from './srv/roman.service';
+import { ExampleAService } from './srv/example-a.service';
+import { ExampleBService } from './srv/example-b.service';
+import { ExampleCService } from './srv/example-c.service';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +21,12 @@ export class AppComponent implements OnInit {
 //iii: number = 189;
 
   constructor(
-    public studentService: StudentService, 
+    public studentService: StudentService,
     public someSrv: SomeserviceService,
-    public romanSrv: RomanService){
+    public romanSrv: RomanService,
+    public exampleASrv: ExampleAService,
+    public exampleBSrv: ExampleBService,
+    public exampleCSrv: ExampleCService){
   }
 
   ngOnInit(): void {
@@ -38,7 +44,21 @@ export class AppComponent implements OnInit {
       console.log(data)
     }) */
 
+    this.exampleCSrv.operation().subscribe(v => {
+      console.log(v, "subscriber")
+    })
+
+    this.exampleCSrv.observable$.subscribe(v => {
+      console.log("direct subscr", v)
+    })
+
     console.log("[ngOnInit()] completed")
+  }
+
+  oper() {
+    this.exampleCSrv.operation().subscribe(v => {
+      console.log(v)
+    })
   }
 
   reloadProducte(): void{
@@ -86,7 +106,7 @@ export class AppComponent implements OnInit {
       stock: 0,
       brand: '',
       category: '',
-      images: []      
+      images: []
     })
   }
 }

@@ -15,7 +15,7 @@ export class RomanService {
 
   data123: string[] = ["1", "2"]
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }// Сделать все возможные варианты как получать и как хранить полученные с сервера данные
 
   loadProducts(): void {
 
