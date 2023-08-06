@@ -1,0 +1,4 @@
+export class UserMessage {
+    data: string
+    accepted: boolean
+}

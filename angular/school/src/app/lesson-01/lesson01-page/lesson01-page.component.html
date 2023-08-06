@@ -1,1 +1,13 @@
-<p>lesson01-page works!</p>
+<div class="mx-auto max-w-2xl">
+
+    <button class="border border-green-700 rounded-sm p-2" (click)="openModal()">Open Modal</button>
+
+    <!-- <app-modal-form *ngIf="isModalOpen" (finished)="Finished($event)"></app-modal-form> -->
+    <app-modal-form-a *ngIf="isModalOpen" (finished)="Finished($event)" [formData]="user"></app-modal-form-a>
+    <h1 *ngIf="userName" class="rounded-lg border border-l-4 mt-1 p-1 border-stone-500 text-lg">Name: {{userName}}
+    </h1>
+
+    <p class="border border-l-4 border-blue-500 p-1 mt-1">Этот модуль содержит примеры работы модальных форм без
+        использование дополнительных сервисов</p>
+
+</div>

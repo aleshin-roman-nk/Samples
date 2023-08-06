@@ -1,0 +1,19 @@
+<div class="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal Form</h5>
+          <button type="button" class="close border border-red-900 bg-red-400" (click)="refuse()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <!-- Form controls go here -->
+          <form (ngSubmit)="submitForm()">
+            <!-- Form fields -->
+            <input class="p-2 border border-green-600" type="text" [(ngModel)]="formData.name" name="name" required>
+            <!-- Additional form fields -->
+            <button class="ml-2 border border-green-300 p-2" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
