@@ -25,5 +25,7 @@ namespace PlayEF_Sqlite.Repos
 		{
 			return db.Thoughts.Where(thought => !db.Cards.Any(card => card.ThoughtId == thought.id)).ToList();
 		}
+
+
 	}
 }

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PlayEF_Sqlite.Entities
 {
-	internal class Thought
+	public class ThExpression
 	{
 		public int id { get; set; }
-		public string text { get; set; }
-		public IEnumerable<ThExpression> Expressions { get; set; }
+		public int thoughtId { get; set; }
+		public string name { get; set; }
 	}
 }
