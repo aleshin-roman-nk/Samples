@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34009.444
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppPrototypes", "ConsoleAppPrototypes\ConsoleAppPrototypes.csproj", "{BBA33DD4-A8A4-46D9-9F65-3862C3782A74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppPrototypes", "ConsoleAppPrototypes\ConsoleAppPrototypes.csproj", "{BBA33DD4-A8A4-46D9-9F65-3862C3782A74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levenshtein", "Levenshtein\Levenshtein.csproj", "{31BD02EB-45C2-4A0E-BB26-3775B29ACBC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BBA33DD4-A8A4-46D9-9F65-3862C3782A74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBA33DD4-A8A4-46D9-9F65-3862C3782A74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBA33DD4-A8A4-46D9-9F65-3862C3782A74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31BD02EB-45C2-4A0E-BB26-3775B29ACBC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31BD02EB-45C2-4A0E-BB26-3775B29ACBC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31BD02EB-45C2-4A0E-BB26-3775B29ACBC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31BD02EB-45C2-4A0E-BB26-3775B29ACBC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

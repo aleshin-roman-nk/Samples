@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Configuration;
 
 namespace JWTExample.Controllers
 {
@@ -14,11 +15,11 @@ namespace JWTExample.Controllers
     public class AuthController : ControllerBase
     {
         public static User user = new User();
-        private readonly IConfiguration configuration;
+        private readonly IConfiguration _configuration;
 
         public AuthController(IConfiguration configuration)
         {
-            this.configuration = configuration;
+            this._configuration = configuration;
         }
 
         [HttpPost("register")]
@@ -51,6 +52,20 @@ namespace JWTExample.Controllers
             return Ok(token);
         }
 
+        [HttpGet]
+        public IActionResult Get()
+        {
+			var username = User.Identity?.Name;
+			var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+			//var customClaimValue = User.FindFirst("YourCustomClaim")?.Value;
+			var roleClaimValue = User.FindFirst(ClaimTypes.Role)?.Value;
+
+			// Use the extracted information as needed
+			// ...
+
+			return Ok(new { Username = username, UserId = userId, RoleClaim = roleClaimValue });
+		}
+
         private void CreatePassowrHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512())
@@ -60,30 +75,55 @@ namespace JWTExample.Controllers
             }
         }
 
-        private string CreateToken(User user)
-        {
-            List<Claim> claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.Username)
+		//private string CreateToken(User user)
+		//{
+		//    List<Claim> claims = new List<Claim>
+		//    {
+		//        new Claim(ClaimTypes.Name, user.Username)
 
-            };
+		//    };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetSection("AppSettings:Token").Value));
+		//    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
 
-            var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+		//    var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-            var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.Now.AddDays(1),
-                signingCredentials: cred
-                );
+		//    var token = new JwtSecurityToken(
+		//        claims: claims,
+		//        expires: DateTime.Now.AddDays(1),
+		//        signingCredentials: cred
+		//        );
 
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+		//    var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
-            return jwt;
-        }
+		//    return jwt;
+		//}
 
-        private bool VerifyPassword(string password, byte[] passwordHash, byte[] passwordSalt)
+
+		private string CreateToken(User user)
+		{
+
+			List<Claim> claims = new List<Claim>
+			{
+				new Claim(ClaimTypes.Name, user.Username),
+				new Claim(ClaimTypes.Role, "Admin")
+			};
+
+			var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
+				_configuration.GetSection("AppSettings:Token").Value));
+
+			var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+			var token = new JwtSecurityToken(
+				claims: claims,
+				expires: DateTime.Now.AddDays(1),
+				signingCredentials: creds);
+
+			var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+			return jwt;
+		}
+
+		private bool VerifyPassword(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512(user.PasswordSalt))
             {

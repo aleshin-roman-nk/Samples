@@ -7,7 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 export class ModalService {
 
 constructor(){
-console.log(`ModalService created ${this.uid}`)
 }
 
   uid: number = Math.floor(Math.random() * 1000);

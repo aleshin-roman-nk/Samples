@@ -13,14 +13,12 @@ export class ProductsService {
   constructor(
     private http: HttpClient,
     private errorService: ErrorService
-  ) {
-    console.log("ProductsService has been created")
-  }
+  ) {}
 
   products: IProduct[] = []
 
   getAll(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>('https://fakestoreapi.com/products', {
+    return this.http.get<IProduct[]>('https://fakestoreapi.com/products1', {
       params: new HttpParams().append('limit', 5)
     })
       .pipe(

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace mvp_communicate_routing
 {
-    internal class View: IComp
+    internal class View
     {
-        Hub _hub;
-        public View(Hub h) 
+        ServicesHub _hub;
+        public View(ServicesHub h)
         {
             _hub = h;
         }
@@ -18,15 +18,16 @@ namespace mvp_communicate_routing
 
         public void DoRequest()
         {
-            Console.WriteLine($"::view '{Name}' : requesting to service-db");
-            _hub.Send(new Message { from = Name, to = "service-db", data = "give me data", method = "get" });
-        }
+            /*
+             * по идее здесь, в клиенте, как это происходит в angular, и др фронтенд, ответ ожидается тут же
+             * поэтому хаб должен тут же вернуть ответ
+             * var res = _hub.Send(new Message {...})
+             */
+            //var res = _hub.Send(new Message { from = Name, to = "service-db", data = "give me data", method = "add-product" });
+            var res = _hub.Send(new Message { from = Name, to = "categories", data = "", method = "get-categories" });
 
-        public void PutMessage(Message m)
-        {
-            Console.WriteLine($"<== view-client '{Name}'");
-            Console.WriteLine($"from: {m.from}");
-            Console.WriteLine($"data: {m.data}");
-        }
+            LogTool.Print(res);
+
+		}
     }
 }

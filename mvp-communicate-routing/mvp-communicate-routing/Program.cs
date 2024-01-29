@@ -54,13 +54,15 @@ using mvp_communicate_routing;
  * 
  */
 
-
-Hub hub = new Hub();
+ServicesHub hub = new ServicesHub();
 var a = new View(hub);
-var b = new Service(hub);
+var b = new ProductService(hub);
+var categs = new CategoryService();
 
-hub.Register(a); // а можно управлять временем жизни и задавать тип, а не экземпляр
-hub.Register(b);
+//hub.Register(a); // а можно управлять временем жизни и задавать тип, а не экземпляр
+hub.RegisterService(b);
+hub.RegisterService(categs);
+hub.RegisterService(categs);
 
 a.DoRequest();
 
