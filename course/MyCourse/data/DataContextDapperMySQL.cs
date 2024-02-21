@@ -1,47 +1,45 @@
 using System.Data;
 using Dapper;
-using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 
 namespace MyCourse.Data
 {
 
 
-    public class DataContextDapper
+    public class DataContextDapperMySQL
     {
-        //private string _connectionString = "Server=localhost;Database=DotNetCourseDatabase;TrustServerCertificate=true;Trusted_Connection=true";
+        // server=your_server_address;port=3306;database=your_database_name;user=your_username;password=your_password;"
+        //private string _connectionString = "Server=localhost;Database=mycourse;port=3306;user=root;password=1111";
         private string? _connectionString;
 
-
-        public DataContextDapper(IConfiguration config)
+        public DataContextDapperMySQL(IConfiguration config)
         {
             _connectionString = config.GetConnectionString("DefaultConnection");
         }
 
         public IEnumerable<TData> LoadData<TData>(string sql)
         {
-            IDbConnection dbConnection = new SqlConnection(_connectionString);
+            IDbConnection dbConnection = new MySqlConnection(_connectionString);
             return dbConnection.Query<TData>(sql);
         }
 
         public TData LoadDataSingle<TData>(string sql)
         {
-            IDbConnection dbConnection = new SqlConnection(_connectionString);
+            IDbConnection dbConnection = new MySqlConnection(_connectionString);
             return dbConnection.QuerySingle<TData>(sql);
         }
 
         public bool ExecuteSql(string sql)
         {
-            IDbConnection dbConnection = new SqlConnection(_connectionString);
+            IDbConnection dbConnection = new MySqlConnection(_connectionString);
             return dbConnection.Execute(sql) > 0;
         }
 
         public int ExecuteSqlWithRows(string sql)
         {
-            IDbConnection dbConnection = new SqlConnection(_connectionString);
+            IDbConnection dbConnection = new MySqlConnection(_connectionString);
             return dbConnection.Execute(sql);
         }
-
     }
-
 }

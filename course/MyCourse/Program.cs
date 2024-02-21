@@ -1,54 +1,70 @@
-﻿using System.Data;
-using Dapper;
-using Microsoft.Data.SqlClient;
+﻿using System.Text.Json;
+using Microsoft.Extensions.Configuration;
 using MyCourse.Data;
+using Newtonsoft.Json;
 
-var dataContext = new DataContextDapper();
 
-var dt = dataContext.LoadDataSingle<DateTime>("select getdate()");
+IConfiguration config = new ConfigurationBuilder()
+                            .AddJsonFile("appsettings.json")
+                            .Build();
 
-System.Console.WriteLine(dt);
+//var dataContext = new DbContextEFMySQL(config);
+var dapper = new DataContextDapperMySQL(config);
 
-var cmtr = new Computer{
-CPUCores = 4,
-HasLTE = false,
-HasWifi = false,
-Motherboard = "ZZZ345",
-Price = 1200,
-ReleaseDate = DateTime.Now,
-VideoCard = "3060 RTX"
-};
 
-string sql1 = @"insert into TutorialAppSchema.Computer(
-CPUCores,
-HasLTE,
-HasWifi,
-Motherboard,
-Price,
-ReleaseDate,
-VideoCard) 
-";
+/* dataContext.Add(cmtr);
+dataContext.SaveChanges();
 
-string sql2Values = $"values ('{cmtr.CPUCores}', '{cmtr.HasLTE}', '{cmtr.HasWifi}', '{cmtr.Motherboard}', '{cmtr.Price}', '{cmtr.ReleaseDate.ToString("yyyy-MM-dd")}', '{cmtr.VideoCard}')";
-
-string sql = $"{sql1} {sql2Values}";
-
-System.Console.WriteLine(sql);
-
-var result = dataContext.ExecuteSql(sql);
-
-Console.WriteLine(result);
-
-// "Computer." is not nessesary but is good practice
-string sqlSelect = @"select
-Computer.ReleaseDate,
-Computer.VideoCard,
-Computer.Motherboard,
-Computer.Price
-from TutorialAppSchema.Computer";
-
-var compResult = dataContext.LoadData<Computer>(sqlSelect);
+var compResult = dataContext.Computers.ToArray();
 
 foreach(var item in compResult){
     System.Console.WriteLine($"{item.ComputerId} | {item.ReleaseDate} | {item.VideoCard} | {item.Motherboard} | {item.Price}");
+} */
+
+//using StreamWriter openFile = new ("log.txt", append: true);
+
+var computersJson = File.ReadAllText("computers.json");
+
+var computers = JsonConvert.DeserializeObject<IEnumerable<Computer>>(computersJson);
+/* 
+if (computers != null)
+{
+    foreach (var comp in computers)
+    {
+        System.Console.WriteLine(comp.Motherboard);
+    }
+} 
+*/
+
+if (computers != null)
+{
+    foreach (var comp in computers)
+    {
+        string sql = @"INSERT INTO mycourse.computers(
+    Motherboard,
+    CPUCores,
+    HasWifi,
+    HasLTE,
+    ReleaseDate,
+    Price,
+    VideoCard
+) VALUES ('" + escapeSingleQuote(comp.Motherboard)
+        + "','" + comp.CPUCores
+        + "','" + Convert.ToInt16(comp.HasWifi)
+        + "','" + Convert.ToInt16(comp.HasLTE)
+        + "','" + comp.ReleaseDate == null ? "NULL" : comp.ReleaseDate?.ToString("yyyy-MM-dd")
+        + "','" + comp.Price
+        + "','" + escapeSingleQuote(comp.VideoCard)
+        + "')";
+
+System.Console.WriteLine(sql);
+
+        dapper.ExecuteSql(sql);
+    }
+}
+
+string escapeSingleQuote(string inputString)
+{
+    string outputString = inputString.Replace("'", "''");
+    return outputString;
 }
