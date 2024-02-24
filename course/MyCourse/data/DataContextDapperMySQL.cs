@@ -15,7 +15,7 @@ namespace MyCourse.Data
 
         public DataContextDapperMySQL(IConfiguration config)
         {
-            _connectionString = config.GetConnectionString("DefaultConnection");
+            _connectionString = config.GetConnectionString("RemoteMySqlConnection");
         }
 
         public IEnumerable<TData> LoadData<TData>(string sql)
@@ -34,6 +34,11 @@ namespace MyCourse.Data
         {
             IDbConnection dbConnection = new MySqlConnection(_connectionString);
             return dbConnection.Execute(sql) > 0;
+        }
+
+        public bool ExecuteSqlWithParameters(string sql, object param){
+            IDbConnection dbConnection = new MySqlConnection(_connectionString);
+            return dbConnection.Execute(sql, param) > 0;
         }
 
         public int ExecuteSqlWithRows(string sql)

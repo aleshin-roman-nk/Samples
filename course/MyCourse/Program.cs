@@ -1,4 +1,6 @@
 ﻿using System.Text.Json;
+using AutoMapper;
+using Dapper;
 using Microsoft.Extensions.Configuration;
 using MyCourse.Data;
 using Newtonsoft.Json;
@@ -25,46 +27,43 @@ foreach(var item in compResult){
 
 var computersJson = File.ReadAllText("computers.json");
 
+//var computersSnakeJson = File.ReadAllText("computerssnake.json");
+
+//Mapper mapper = new Mapper();
+
 var computers = JsonConvert.DeserializeObject<IEnumerable<Computer>>(computersJson);
-/* 
-if (computers != null)
-{
-    foreach (var comp in computers)
-    {
-        System.Console.WriteLine(comp.Motherboard);
-    }
-} 
-*/
 
 if (computers != null)
 {
     foreach (var comp in computers)
     {
-        string sql = @"INSERT INTO mycourse.computers(
-    Motherboard,
-    CPUCores,
-    HasWifi,
-    HasLTE,
-    ReleaseDate,
-    Price,
-    VideoCard
-) VALUES ('" + escapeSingleQuote(comp.Motherboard)
-        + "','" + comp.CPUCores
-        + "','" + Convert.ToInt16(comp.HasWifi)
-        + "','" + Convert.ToInt16(comp.HasLTE)
-        + "','" + comp.ReleaseDate == null ? "NULL" : comp.ReleaseDate?.ToString("yyyy-MM-dd")
-        + "','" + comp.Price
-        + "','" + escapeSingleQuote(comp.VideoCard)
-        + "')";
+        string sql = @"INSERT INTO mycourse.Computers (
+                        Motherboard,
+                        CPUCores,
+                        HasWifi,
+                        HasLTE,
+                        ReleaseDate,
+                        Price,
+                        VideoCard
+                    ) VALUES (
+                        @Motherboard,
+                        @CPUCores,
+                        @HasWifi,
+                        @HasLTE,
+                        @ReleaseDate,
+                        @Price,
+                        @VideoCard
+                    );";
 
-System.Console.WriteLine(sql);
-
-        dapper.ExecuteSql(sql);
+        dapper.ExecuteSqlWithParameters(sql, new
+    {
+        Motherboard = comp.Motherboard,
+        CPUCores = comp.CPUCores,
+        HasWifi = comp.HasWifi,
+        HasLTE = comp.HasLTE,
+        ReleaseDate = comp.ReleaseDate,
+        Price = comp.Price,
+        VideoCard = comp.VideoCard
+    });
     }
-}
-
-string escapeSingleQuote(string inputString)
-{
-    string outputString = inputString.Replace("'", "''");
-    return outputString;
 }
