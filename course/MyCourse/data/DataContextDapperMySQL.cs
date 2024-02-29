@@ -15,7 +15,8 @@ namespace MyCourse.Data
 
         public DataContextDapperMySQL(IConfiguration config)
         {
-            _connectionString = config.GetConnectionString("RemoteMySqlConnection");
+            //_connectionString = config.GetConnectionString("RemoteMySqlConnection");
+            _connectionString = config.GetConnectionString("LocalDockerMySqlConnection");
         }
 
         public IEnumerable<TData> LoadData<TData>(string sql)

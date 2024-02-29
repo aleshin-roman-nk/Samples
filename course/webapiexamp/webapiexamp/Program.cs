@@ -14,16 +14,27 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<DbContextMySql>();
 builder.Services.AddScoped<ComputersRepo>();
 
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy(name: "AllowAll",
+		builder =>
+		{
+			builder.AllowAnyOrigin()
+				   .AllowAnyMethod()
+				   .AllowAnyHeader();
+		});
+}); // добавляем сервисы CORS
+
 builder.Services.AddDbContext<DbContextMySql>(options =>
 {
 	var dbIp = builder.Configuration["DB_IP"] != null ? builder.Configuration["DB_IP"] : "localhost";
+	var dbPort = builder.Configuration["DB_PORT"] != null ? builder.Configuration["DB_PORT"] : "3306";
 
-    Console.WriteLine(dbIp);
-
-    var connection = $"Server={dbIp};Database=mycourse;port=3306;user=root;password=1111;";
+	var connection = $"Server={dbIp};Database=mycourse;port={dbPort};user=root;password=1111;";
 
 	//options.UseMySql(builder.Configuration.GetConnectionString("RemoteMySqlConnection"), new MySqlServerVersion(new Version(8, 0, 25)));
 	options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 25)));
+	
 	
 	
 	
@@ -33,6 +44,9 @@ builder.Services.AddDbContext<DbContextMySql>(options =>
 });
 
 var app = builder.Build();
+
+// настраиваем CORS
+app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -73,7 +87,7 @@ app.UseExceptionHandler(errorApp =>
 });
 
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

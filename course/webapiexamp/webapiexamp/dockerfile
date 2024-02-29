@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
 # Expose the application port
-EXPOSE 80
+EXPOSE 9999
 
 # Copy csproj and restore any dependencies (via NuGet)
 COPY *.csproj ./

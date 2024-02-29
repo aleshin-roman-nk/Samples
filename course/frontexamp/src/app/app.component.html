@@ -1,0 +1,7 @@
+<div class="flex-container">
+    <app-computer *ngFor="let comp of data" [computer]="comp"></app-computer>
+</div>
+
+
+
+<div *ngIf="loading">LOADING...</div>
