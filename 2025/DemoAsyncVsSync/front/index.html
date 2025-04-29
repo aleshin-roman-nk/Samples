@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тест API: Sync vs Async</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 40px;
+        }
+        button {
+            margin-right: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        li {
+            margin: 6px 0;
+            font-family: monospace;
+        }
+        .time {
+            color: gray;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Тест API: Синхронный vs Асинхронный</h2>
+
+    <button onclick="sendRequests('sync')">🔴 Тест синхронного API</button>
+    <button onclick="sendRequests('async')">🟢 Тест асинхронного API</button>
+
+    <ul id="result"></ul>
+
+    <script>
+        async function sendRequests(type) {
+            const ul = document.getElementById('result');
+            ul.innerHTML = '';
+
+            const endpoint = `http://localhost:5262/api/test/${type}`;
+
+            for (let i = 1; i <= 10; i++) {
+                const li = document.createElement('li');
+                const start = performance.now();
+
+                li.textContent = `🔄 [${i}] ${type.toUpperCase()} → Запрос отправлен...`;
+                ul.appendChild(li);
+
+                fetch(endpoint)
+                    .then(res => res.text())
+                    .then(text => {
+                        const duration = Math.round(performance.now() - start);
+                        li.innerHTML = `✅ [${i}] ${type.toUpperCase()} → ${text} <span class="time">(${duration} мс)</span>`;
+                    })
+                    .catch(err => {
+                        const duration = Math.round(performance.now() - start);
+                        li.innerHTML = `❌ [${i}] ${type.toUpperCase()} → Ошибка: ${err.message} <span class="time">(${duration} мс)</span>`;
+                    });
+            }
+        }
+    </script>
+</body>
+</html>

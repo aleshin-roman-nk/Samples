@@ -1,0 +1,6 @@
+@WebApplicationAsyncLesson_HostAddress = http://localhost:5028
+
+GET {{WebApplicationAsyncLesson_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
