@@ -1,7 +1,7 @@
+using EFCoreRepo;
 using Microsoft.EntityFrameworkCore;
-using WebApiLesson;
-using WebApiLesson.ImplementRepo.EF;
-using WebApiLesson.ImplementRepo;
+using ServicesCore;
+using ServicesCore.Repos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,11 +12,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<AnimalRepo>();
-
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddScoped<AnimalService>();
+builder.Services.AddScoped<IAnimalRepo, AnimalRepo>();
+builder.Services.AddDbContext<AppData>(options =>
 	options.UseSqlite("Data Source=sandbox.sqlite"));
-
 
 var app = builder.Build();
 
